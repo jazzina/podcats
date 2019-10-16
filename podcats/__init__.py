@@ -251,7 +251,10 @@ def serve(channel):
 def main():
     """Main function"""
     args = parser.parse_args()
-    url = 'http://' + args.host + ':' + args.port
+    if args.base_url:
+        url = args.base_url
+    else:
+        url = 'http://' + args.host + ':' + args.port
     channel = Channel(
         root_dir=path.abspath(args.directory),
         root_url=url,
@@ -307,6 +310,7 @@ parser.add_argument(
 )
 parser.add_argument('--title', help='optional feed title')
 parser.add_argument('--link', help='optional feed link')
+parser.add_argument('--base_url', help='optional base url')
 
 
 if __name__ == '__main__':
